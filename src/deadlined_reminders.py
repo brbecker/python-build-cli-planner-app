@@ -1,5 +1,6 @@
 from abc import ABC, ABCMeta, abstractmethod
 from collections.abc import Iterable
+from datetime import datetime
 
 from dateutil.parser import parse
 
@@ -20,3 +21,6 @@ class DateReminder(DeadlinedReminder):
     def __init__(self, text: str, date: str) -> None:
         self.date = parse(date, dayfirst=True)
         self.text = text
+
+    def is_due(self):
+        return self.date <= datetime.now()
